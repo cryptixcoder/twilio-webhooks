@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Magyarjeti\MimeTypes\MimeTypeConverter;
 use App\Models\Message;
+use Illuminate\Support\Facades\Storage;
 
 class TwilioController extends Controller
 {

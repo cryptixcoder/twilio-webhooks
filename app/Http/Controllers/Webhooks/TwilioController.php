@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Webhooks;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Magyarjeti\MimeTypes\MimeTypeConverter;
 use App\Models\Message;
 
 class TwilioController extends Controller

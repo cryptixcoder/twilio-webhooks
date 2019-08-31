@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::group(['prefix' => 'webhooks'], function () {
     Route::post("twilio/sms", 'Webhooks\TwilioController@handleSMS');
 });
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

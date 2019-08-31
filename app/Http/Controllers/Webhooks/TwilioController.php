@@ -54,7 +54,7 @@ class TwilioController extends Controller
             $message->media()->create([
                 'twilio_id' => $mediaSid,
                 'content_type' => $MIMEType,
-                'source' => Storage::url($path)
+                'filename' => Storage::url($path)
             ]);
         }
     }

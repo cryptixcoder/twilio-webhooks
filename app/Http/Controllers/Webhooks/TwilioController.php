@@ -26,7 +26,7 @@ class TwilioController extends Controller
 
         $this->saveMedia($message, $request);
 
-        return response()->header('Content-Type', 'text/xml')->send('<Response></Response>');
+        return response('<Response></Response>')->header('Content-Type', 'text/xml');
     }
 
     protected function saveMedia(Message $message, Request $request)

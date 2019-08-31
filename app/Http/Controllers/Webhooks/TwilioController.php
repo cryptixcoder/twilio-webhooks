@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Webhooks;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 use App\Http\Controllers\Controller;
 use Magyarjeti\MimeTypes\MimeTypeConverter;
 use App\Models\Message;
 use Illuminate\Support\Facades\Storage;
+use Twilio;
 
 class TwilioController extends Controller
 {
@@ -35,7 +37,9 @@ class TwilioController extends Controller
             return;
         }
 
-        $converter = new MimeTypeConverter;
+        $media =
+
+            $converter = new MimeTypeConverter;
         $numMedia = (int) $request->NumMedia;
 
         for ($i = 0; $i < $numMedia; $i++) {
@@ -45,7 +49,10 @@ class TwilioController extends Controller
             $fileExtension = $converter->toExtension($MIMEType);
             $mediaSid = basename($mediaUrl);
 
-            $media = file_get_contents($mediaUrl);
+            $media = $content = (new Client)->get($mediaUrl, [
+                'auth' => [env('TWILIO_ACCOUNT_SID'), env('TWILIO_AUTH_TOKEN')],
+            ])->getBody();
+
             $filename = "$mediaSid.$fileExtension";
             $path = "messages/$message->twilio_sid/$filename";
 
